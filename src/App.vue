@@ -1,40 +1,74 @@
 <script lang="ts">
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue"
+import Card from "./components/Card.vue"
 
 export default {
 	name: 'App',
 	data() {
 		return {
-			currentDate: null
+			date: null,
+			id: null,
+			players: null
 		}
 	},
 	methods: {
 		async fetchGameData() {
-			const gameData = await this.$axios.get('/api/game_data');
-			console.log(gameData);
+			return await this.$axios.get('/api/game_data');
+		},
+
+		async fetchGameDate() {
+			return await this.$axios.get('/api/game_data/date');
+		},
+
+		async fetchGameID() {
+			return await this.$axios.get('/api/game_data/id');
+		},
+
+		async fetchGamePlayers() {
+			return await this.$axios.get('/api/game_data/players');
+		},
+
+		extractGameState() {
+			this.fetchGameData().then((response) => {
+				this.date = response.data.date;
+				this.id = response.data.id;
+				this.players = response.data.players;
+			})
+			
+			console.log(this.id);
+		},
+
+		printGameState() {
+			console.log(this.fetchGameData());
+			console.log(this.date);
+			console.log(this.players);
+			console.log(this.id);
 		}
 	},
 	components: {
-		HelloWorld
+		Card
+	},
+	mounted() {
+		this.extractGameState()
 	}
 }
+
 </script>
 
 <template>
 	<header>
+		<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :key=player>
+		</Card>
+
 		<img
-	  alt="Vue logo"
-   class="logo"
-   src="@/assets/logo.svg"
-   width="125"
-   height="125"
-   @click="fetchGameData()"
-   />
+			alt="Vue logo"
+			class="logo"
+			src="@/assets/logo.svg"
+			width="125"
+			height="125"
+			@click="printGameState()"
+   		/>
 
 		<div class="wrapper">
-			<HelloWorld msg="You did it!" />
-
 			<nav>
 				<RouterLink to="/">Home</RouterLink>
 				<RouterLink to="/about">About</RouterLink>
@@ -42,7 +76,6 @@ export default {
 		</div>
 	</header>
 
-	<RouterView />
 </template>
 
 <style scoped>
