@@ -33,8 +33,6 @@ export default {
 				this.id = response.data.id;
 				this.players = response.data.players;
 			})
-			
-			console.log(this.id);
 		},
 
 		printGameState() {
