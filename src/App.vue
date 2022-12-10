@@ -5,34 +5,31 @@ export default {
 	name: 'App',
 	data() {
 		return {
-			date: null,
-			id: null,
-			players: null
+			date: "0.0.0",
+			name: "name_unset",
+			id: "42c0ff06-1d95-4ef7-bad5-d8e28fa2473b",
+			players: []
 		}
 	},
 	methods: {
-		async fetchGameData() {
-			return await this.$axios.get('/api/game_data');
-		},
-
-		async fetchGameDate() {
-			return await this.$axios.get('/api/game_data/date');
-		},
-
-		async fetchGameID() {
-			return await this.$axios.get('/api/game_data/id');
-		},
-
-		async fetchGamePlayers() {
-			return await this.$axios.get('/api/game_data/players');
+		fetchGameData() {
+			const body = { "id": this.id };
+			return this.$axios.get('/api/game_data', body);
 		},
 
 		extractGameState() {
-			this.fetchGameData().then((response) => {
+			/*this.fetchGameData() => {
 				this.date = response.data.date;
+				this.name = response.data.name;
 				this.id = response.data.id;
 				this.players = response.data.players;
-			})
+			})*/
+
+			let fetched = this.fetchGameData();
+			console.log(`fetched : ${fetched}`);
+
+			//console.log("uh ooooh");
+			//setTimeout(this.extractGameState(), 5000);
 		},
 
 		printGameState() {
@@ -54,17 +51,7 @@ export default {
 
 <template>
 	<header>
-		<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :key=player>
-		</Card>
-
-		<img
-			alt="Vue logo"
-			class="logo"
-			src="@/assets/logo.svg"
-			width="125"
-			height="125"
-			@click="printGameState()"
-   		/>
+		<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :key=player></Card>
 
 		<div class="wrapper">
 			<nav>
