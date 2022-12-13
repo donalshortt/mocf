@@ -8,16 +8,21 @@ export default {
 
 <template>
 	<div id="card">
-		<p>{{ ign }}</p>
-		<p>{{ score }}</p>
+		<h2>{{ ign }}</h2>
+		<h4>{{ score }}</h4>
 	</div>
 </template>
 
 <style scoped>
 
 #card {
-	margin-top: 20px;
-	background-color: black;
+	background-color: rgba(120, 120, 120, .15);
+	backdrop-filter: blur(5px);
+	text-align: center;
+	width: 20em;
+	display: inline-block;
+	border: 2px solid gray;
+	margin: 2em;
 }
 
 </style>

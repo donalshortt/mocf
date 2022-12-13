@@ -12,117 +12,60 @@ export default {
 		}
 	},
 	methods: {
-		fetchGameData() {
-			const body = { "id": this.id };
-			return this.$axios.get('/api/game_data', body);
+		async fetchGameData() {
+			return await this.$axios.get('/api/game_data', { params: { id: this.id } });
 		},
+		
 
 		extractGameState() {
-			/*this.fetchGameData() => {
+			this.fetchGameData().then((response) => {
 				this.date = response.data.date;
 				this.name = response.data.name;
 				this.id = response.data.id;
 				this.players = response.data.players;
-			})*/
-
-			let fetched = this.fetchGameData();
-			console.log(`fetched : ${fetched}`);
-
-			//console.log("uh ooooh");
-			//setTimeout(this.extractGameState(), 5000);
+			})
 		},
-
-		printGameState() {
-			console.log(this.fetchGameData());
-			console.log(this.date);
-			console.log(this.players);
-			console.log(this.id);
-		}
 	},
 	components: {
 		Card
 	},
 	mounted() {
-		this.extractGameState()
+		this.extractGameState();
+
+		let updateData = () => {
+			this.extractGameState();
+			setTimeout(updateData, 15000);
+		};
+
+		setTimeout(updateData, 15000);
 	}
 }
 
 </script>
 
 <template>
-	<header>
-		<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :key=player></Card>
+	<div id="jomama">
+	<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :key=player></Card>
 
-		<div class="wrapper">
-			<nav>
-				<RouterLink to="/">Home</RouterLink>
-				<RouterLink to="/about">About</RouterLink>
-			</nav>
-		</div>
-	</header>
-
+	<!--<div class="wrapper">
+		<nav>
+			<RouterLink to="/">Home</RouterLink>
+			<RouterLink to="/about">About</RouterLink>
+		</nav>
+	</div>-->
+	</div>
 </template>
 
 <style scoped>
-header {
-	line-height: 1.5;
-	max-height: 100vh;
-}
 
-.logo {
-	display: block;
-	margin: 0 auto 2rem;
-}
-
-nav {
+#jomama {
+	background-image: url("./assets/18971522.jpg");
+	background-size: cover;
+	background-image: no-repeat;
+	background-position: center;
+	height: 100%;
 	width: 100%;
-	font-size: 12px;
-	text-align: center;
-	margin-top: 2rem;
+	margin: 0;
 }
 
-nav a.router-link-exact-active {
-	color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-	background-color: transparent;
-}
-
-nav a {
-	display: inline-block;
-	padding: 0 1rem;
-	border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-	border: 0;
-}
-
-@media (min-width: 1024px) {
-	header {
-		display: flex;
-		place-items: center;
-		padding-right: calc(var(--section-gap) / 2);
-	}
-
-	.logo {
-		margin: 0 2rem 0 0;
-	}
-
-	header .wrapper {
-		display: flex;
-		place-items: flex-start;
-		flex-wrap: wrap;
-	}
-
-	nav {
-		text-align: left;
-		margin-left: -1rem;
-		font-size: 1rem;
-
-		padding: 1rem 0;
-		margin-top: 1rem;
-	}
-}
 </style>
