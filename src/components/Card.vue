@@ -24,6 +24,9 @@ export default {
 	width: 20em;
 	display: inline-block;
 	margin: 2em;
+	-webkit-box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
 }
 
 </style>
