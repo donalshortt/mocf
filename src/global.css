@@ -1,0 +1,22 @@
+:root {
+	@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+	--off-white: #a6a6a6;
+	--gold: #FFD700;
+}
+
+html {
+	font-family: 'Roboto', sans-serif;
+}
+
+body {
+	background-image: url("./assets/pink-blue-gradient.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	margin: 0;
+}
+
+html, body {
+	height: 100%;
+}

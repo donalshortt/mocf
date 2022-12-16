@@ -16,12 +16,13 @@ export default {
 <style scoped>
 
 #card {
-	background-color: rgba(120, 120, 120, .15);
+	background-color: rgba(0, 0, 0, .40);
 	backdrop-filter: blur(5px);
+	border-radius: .5em;
 	text-align: center;
+	color: var(--off-white);
 	width: 20em;
 	display: inline-block;
-	border: 2px solid gray;
 	margin: 2em;
 }
 

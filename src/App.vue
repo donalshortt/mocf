@@ -1,5 +1,6 @@
 <script lang="ts">
 import Card from "./components/Card.vue"
+import TopBar from "./components/TopBar.vue"
 
 export default {
 	name: 'App',
@@ -27,7 +28,8 @@ export default {
 		},
 	},
 	components: {
-		Card
+		Card,
+		TopBar
 	},
 	mounted() {
 		this.extractGameState();
@@ -44,7 +46,10 @@ export default {
 </script>
 
 <template>
-	<div id="jomama">
+	<div id="main">
+	
+	<TopBar></TopBar>
+
 	<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :key=player></Card>
 
 	<!--<div class="wrapper">
@@ -58,14 +63,7 @@ export default {
 
 <style scoped>
 
-#jomama {
-	background-image: url("./assets/18971522.jpg");
-	background-size: cover;
-	background-image: no-repeat;
-	background-position: center;
-	height: 100%;
-	width: 100%;
-	margin: 0;
+#main {
 }
 
 </style>
