@@ -17,7 +17,6 @@ export default {
 			return await this.$axios.get('/api/game_data', { params: { id: this.id } });
 		},
 		
-
 		extractGameState() {
 			this.fetchGameData().then((response) => {
 				this.date = response.data.date;
