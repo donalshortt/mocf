@@ -2,7 +2,36 @@
 
 export default {
 	name: 'Card',
-	props: ['ign', 'score']
+	data() {
+		return {
+			modifiers: []
+		}
+	},
+	props: ['ign', 'score', 'tag'],
+	methods: {
+		async getModifiers() {
+			return await this.$axios.get('/api/modifiers', { params: { id: this.$parent.id, tag: this.tag } });
+		},
+
+		setModifers() {
+			this.getModifiers().then((response) => {
+				this.modifiers = response.data;
+			})
+		}
+	},
+	mounted() {
+		this.setModifers();
+
+		let updateData = () => {
+			this.setModifers();
+			setTimeout(updateData, 15000);
+		};
+
+		setTimeout(updateData, 15000);
+	},
+	shouldUpdate(newProps, oldProps) {
+		return newProps.modifiers !== oldProps.modifiers;
+	}
 }
 </script>
 
@@ -10,6 +39,9 @@ export default {
 	<div id="card">
 		<h2>{{ ign }}</h2>
 		<h4>{{ score }}</h4>
+		<ul v-cloak>
+			<li v-for="(value, key) in this.modifiers" :key="key">{{ Object.keys(value).toString() }} {{ Object.values(value).toString() }}%</li>
+		</ul>
 	</div>
 </template>
 

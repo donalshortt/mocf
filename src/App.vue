@@ -16,9 +16,8 @@ export default {
 		async fetchGameData() {
 			return await this.$axios.get('/api/game_data', { params: { id: this.id } });
 		},
-		
 
-		extractGameState() {
+		setGameState() {
 			this.fetchGameData().then((response) => {
 				this.date = response.data.date;
 				this.name = response.data.name;
@@ -32,15 +31,19 @@ export default {
 		TopBar
 	},
 	mounted() {
-		this.extractGameState();
+		this.setGameState();
 
 		let updateData = () => {
-			this.extractGameState();
+			this.setGameState();
 			setTimeout(updateData, 15000);
 		};
 
 		setTimeout(updateData, 15000);
+	},
+	shouldUpdate(to, from) {
+		return this.data !== to.data;
 	}
+
 }
 
 </script>
@@ -50,7 +53,7 @@ export default {
 	
 	<TopBar></TopBar>
 
-	<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :key=player></Card>
+	<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player></Card>
 
 	<!--<div class="wrapper">
 		<nav>
