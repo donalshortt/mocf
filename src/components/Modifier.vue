@@ -20,8 +20,12 @@ p {
 	display: inline;
 }
 
-#name {
+#modifier {
 	text-align: left;
+}
+
+#name {
+	margin-left: 1em;
 }
 
 #amount {

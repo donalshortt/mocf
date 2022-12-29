@@ -1,7 +1,7 @@
 <script>
 import Card from "./components/Card.vue"
 import TopBar from "./components/TopBar.vue"
-import Shared from "./shared.js"
+import BarChart from "./components/BarChart.vue"
 
 export default {
 	name: 'App',
@@ -20,19 +20,18 @@ export default {
 
 		setGameState() {
 			this.fetchGameData().then((response) => {
-				if (!Shared.deepEqual(this.$data, response.data)) {
-					console.log("App rerendering!");
-					this.date = response.data.date;
-					this.name = response.data.name;
-					this.id = response.data.id;
-					this.players = response.data.players;
-				}
+				console.log("App rerendering!");
+				this.date = response.data.date;
+				this.name = response.data.name;
+				this.id = response.data.id;
+				this.players = response.data.players;
 			})
 		},
 	},
 	components: {
 		Card,
-		TopBar
+		TopBar,
+		BarChart
 	},
 	mounted() {
 		this.setGameState();
@@ -54,8 +53,11 @@ export default {
 	<TopBar></TopBar>
 	
 	<div id="card_container">
-		<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player></Card>
+		<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player.tag />
 	</div>
+
+	<BarChart :players=this.players />
+
 	<!--<div class="wrapper">
 		<nav>
 			<RouterLink to="/">Home</RouterLink>

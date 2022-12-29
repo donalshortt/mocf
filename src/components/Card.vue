@@ -1,13 +1,13 @@
 <script>
 
 import Modifier from './Modifier.vue'
-import Shared from '../shared.js'
 
 export default {
 	name: 'Card',
 	data() {
 		return {
 			modifiers: [],
+			difference: ""
 		}
 	},
 	computed: {
@@ -29,11 +29,26 @@ export default {
 				}
 			});
 
-			this.difference = modifiedScore;
 			return modifiedScore; 
 		},
 	},
 	props: ['ign', 'score', 'tag'],
+	watch: {
+		modifiedScore(newValue, oldValue) {
+			console.log(`New Value : ${newValue} --- Old value : ${oldValue}`);
+			if (newValue > oldValue) {
+				this.difference = "\u25B2" + (newValue - oldValue);
+			} 
+			else if (newValue < oldValue) {
+				this.difference = "\u25BC" + (oldValue - newValue);
+			} 
+			else {
+				this.difference = "0";
+			}
+
+			console.log(`Diff: ${this.difference}`);
+		}
+	},
 	methods: {
 		async getModifiers() {
 			return await this.$axios.get('/api/modifiers', { params: { id: this.$parent.id, tag: this.tag } });
@@ -41,9 +56,7 @@ export default {
 
 		setModifers() {
 			this.getModifiers().then((response) => {
-				if (!Shared.deepEqual(response.data, this.modifiers)) {
-					this.modifiers = response.data;
-				}
+				this.modifiers = response.data;
 			})
 		}
 	},
@@ -66,7 +79,8 @@ export default {
 <template>
 	<div id="card">
 		<h2>{{ ign }}</h2>
-		<h4>{{ modifiedScore }}</h4>
+		<h2>{{ modifiedScore }}</h2>
+		<h4>{{ difference }}</h4>
 
 		<modifier 
 		:name=Object.keys(value).toString() 
