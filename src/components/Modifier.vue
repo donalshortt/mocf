@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 
 export default {
 	name: 'Modifier',
@@ -9,15 +9,26 @@ export default {
 
 <template>
 	<div id="modifier">
-		<table>
-			<tr>
-				<td>{{ name }}</td>
-				<td>{{ amount }}</td>
-			</tr>
-		</table>
+		<p id="name">{{ name }}</p>
+		<p id="amount">{{ amount }}%</p>
 	</div>
 </template>
 
 <style 	scoped>
+
+p {
+	display: inline;
+}
+
+#name {
+	text-align: left;
+}
+
+#amount {
+	float: right;
+	margin: 0;
+	margin-right: 1em;
+}
+
 </style>
 

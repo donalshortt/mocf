@@ -1,6 +1,7 @@
-<script lang="ts">
+<script>
 import Card from "./components/Card.vue"
 import TopBar from "./components/TopBar.vue"
+import Shared from "./shared.js"
 
 export default {
 	name: 'App',
@@ -19,10 +20,13 @@ export default {
 
 		setGameState() {
 			this.fetchGameData().then((response) => {
-				this.date = response.data.date;
-				this.name = response.data.name;
-				this.id = response.data.id;
-				this.players = response.data.players;
+				if (!Shared.deepEqual(this.$data, response.data)) {
+					console.log("App rerendering!");
+					this.date = response.data.date;
+					this.name = response.data.name;
+					this.id = response.data.id;
+					this.players = response.data.players;
+				}
 			})
 		},
 	},
@@ -39,11 +43,7 @@ export default {
 		};
 
 		setTimeout(updateData, 15000);
-	},
-	shouldUpdate(to, from) {
-		return this.data !== to.data;
 	}
-
 }
 
 </script>
@@ -52,9 +52,10 @@ export default {
 	<div id="main">
 	
 	<TopBar></TopBar>
-
-	<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player></Card>
-
+	
+	<div id="card_container">
+		<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player></Card>
+	</div>
 	<!--<div class="wrapper">
 		<nav>
 			<RouterLink to="/">Home</RouterLink>
@@ -66,7 +67,8 @@ export default {
 
 <style scoped>
 
-#main {
+#card_container {
+	text-align: center;
 }
 
 </style>
