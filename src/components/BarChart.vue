@@ -10,8 +10,8 @@ export default {
 	data() {
 		return {
 			chartData: {
-				labels: [ 'January', 'February', 'March' ],
-				datasets: [ { data: [40, 20, 12] } ]
+				labels: [ ],
+				datasets: [ { data: [] } ]
 			},
 			chartOptions: {
 				responsive: true
@@ -20,25 +20,25 @@ export default {
 	},
 	props: ['players'],
 	methods: {
-		setLabels() {
-			for (player of this.players) {
-				this.chartData.labels.push(player.igns[0]);
-				console.log("waaaow");
-			}
+		setBarLabels(player) {
+			this.chartData.labels.push(player.igns[0]);
+			//console.log(this.chartData.datasets[0]);
+			//this.chartData.datasets[0].push(player.score);
 		},
 		setData() {
 			let data = []
-			for (player of this.players) {
-				data.push(player.score);
-			}
+			this.$props.players.forEach((player) => data.push(player.score));
+			//this.chartData.datasets.push({ "data": data })
+			this.chartData.datasets[0] = {"data": data}
 
-			this.chartData.datasets.push({ data })
+			console.log("data!");
+			console.log(this.chartData.datasets);
 		}
 	},
-	mounted() {
-		console.log(this.players.data);
-		this.setLabels();
+	beforeUpdate() {
+		this.$props.players.forEach((player) => this.setBarLabels(player));
 		this.setData();
+		console.log(this.chartData.datasets[0]);
 	}
 }
 </script>
