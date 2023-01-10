@@ -25,6 +25,10 @@ export default {
 				this.name = response.data.name;
 				this.id = response.data.id;
 				this.players = response.data.players;
+				store.commit("setDate", response.data.date);
+				store.commit("setName", response.data.name);
+				store.commit("setID", response.data.id);
+				store.commit("setPlayers", response.data.players);
 			})
 		},
 	},
@@ -53,7 +57,7 @@ export default {
 	<TopBar></TopBar>
 	
 	<div id="card_container">
-		<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player.tag />
+		<Card v-for="player in store.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player.tag />
 	</div>
 
 	<BarChart :players=this.players />

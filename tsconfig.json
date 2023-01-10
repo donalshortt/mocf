@@ -13,11 +13,11 @@
 	],
 	"compilerOptions": {
 		"module": "ESNext",
-			"paths": {
-     			"@/*": [
-      				"./*"
-     			]
-			}
+		"paths": {
+			"@/*": [
+				"./*"
+			]
+		},
 	},
 	"include": ["*.vue", "*.ts"]
 }

@@ -10,32 +10,9 @@ export default {
 			difference: ""
 		}
 	},
-	computed: {
-		modifiedScore() {
-			let modifiedScore = this.$props.score;
-			
-			this.modifiers.forEach((item) => {
-				let value = Object.values(item).toString();
-
-				if (value[0] == "+") {
-					value = value.replace ("+", "1.");
-					modifiedScore *= parseFloat(value);
-					modifiedScore = Math.round(modifiedScore);
-				} else {
-					value = value.replace("-", "0.");
-					value = 1.0 - parseFloat(value);
-					modifiedScore *= value;
-					modifiedScore = Math.round(modifiedScore);
-				}
-			});
-
-			return modifiedScore; 
-		},
-	},
 	props: ['ign', 'score', 'tag'],
 	watch: {
-		modifiedScore(newValue, oldValue) {
-			console.log(`New Value : ${newValue} --- Old value : ${oldValue}`);
+		score(newValue, oldValue) {
 			if (newValue > oldValue) {
 				this.difference = "\u25B2" + (newValue - oldValue);
 			} 
@@ -79,7 +56,7 @@ export default {
 <template>
 	<div id="card">
 		<h2>{{ ign }}</h2>
-		<h2>{{ modifiedScore }}</h2>
+		<h2>{{ score }}</h2>
 		<h4>{{ difference }}</h4>
 
 		<modifier 
