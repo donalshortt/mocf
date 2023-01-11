@@ -20,25 +20,23 @@ export default {
 	},
 	props: ['players'],
 	methods: {
-		setBarLabels(player) {
-			this.chartData.labels.push(player.igns[0]);
-			//console.log(this.chartData.datasets[0]);
-			//this.chartData.datasets[0].push(player.score);
-		},
-		setData() {
-			let data = []
-			this.$props.players.forEach((player) => data.push(player.score));
-			//this.chartData.datasets.push({ "data": data })
-			this.chartData.datasets[0] = {"data": data}
+		setBarData() {
+			this.chartData.datasets[0].data = []
+			this.chartData.labels = []
 
-			console.log("data!");
-			console.log(this.chartData.datasets);
+			let data = []
+
+			this.players.forEach((player) => {
+				this.chartData.labels.push(player.igns[0]);
+				data.push(player.score);
+			})
+
+			this.chartData.datasets[0].data = data
+			console.log(this.chartData.datasets[0].data);
 		}
 	},
 	beforeUpdate() {
-		this.$props.players.forEach((player) => this.setBarLabels(player));
-		this.setData();
-		console.log(this.chartData.datasets[0]);
+		this.setBarData();
 	}
 }
 </script>
