@@ -56,7 +56,7 @@ export default {
 		<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player.tag />
 	</div>
 
-	<BarChart :players=this.players />
+	<BarChart ref="barchart" :players=this.players />
 
 	<!--<div class="wrapper">
 		<nav>
