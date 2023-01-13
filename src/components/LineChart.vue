@@ -1,26 +1,24 @@
 <script>
-import { Bar } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import { Line } from 'vue-chartjs'
+import { Chart as ChartJS, CategoryScale,LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js'
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 export default {
-	name: 'BarChart',
-	components: { Bar },
+	name: 'LineChart',
+	components: { Line },
 	computed: {
 		chartData() {
 			let labels = []
-			let datasets = [ 
-				{ 
-					data: [],
-					label: "Score",
-					backgroundColor: "rgba(128, 128, 255, 0.3)",
-					borderColor: "white"
-				} 
-			]
-			this.players.forEach((player) => {
-				labels.push(player.igns[0]);
-				datasets[0].data.push(player.score);
+			let datasets = []
+
+			this.players.forEach((player, index) => {
+				if (datasets.some(data.label === player.igns[0])) {
+					datasets[index].data.push(player.score);
+				} else {
+					datasets.push({data: [ player.score ]});
+					labels.push(player.igns[0]);
+				}
 			})
 
 			return { 
@@ -54,16 +52,16 @@ export default {
 </script>
 
 <template>
-  <Bar
+  <Line
 	ref="chart"
-    id="barChartIndividual"
+    id="lineChartIndividual"
     :options="chartOptions"
     :data="chartData"
   />
 </template>
 
 <style scoped>
-	#barChartIndividual {
+	#lineChartIndividual {
 		padding: 1em;
 		background-color: rgba(0, 0, 0, .40);
 		backdrop-filter: blur(5px);

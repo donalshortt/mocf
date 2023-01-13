@@ -2,6 +2,7 @@
 import Card from "./components/Card.vue"
 import TopBar from "./components/TopBar.vue"
 import BarChart from "./components/BarChart.vue"
+import Line from "./components/LineChart.vue"
 
 export default {
 	name: 'App',
@@ -31,7 +32,8 @@ export default {
 	components: {
 		Card,
 		TopBar,
-		BarChart
+		BarChart,
+		Line
 	},
 	mounted() {
 		this.setGameState();
@@ -57,6 +59,7 @@ export default {
 	</div>
 
 	<BarChart ref="barchart" :players=this.players />
+	<Line ref="linechart" :players=this.players />
 
 	<!--<div class="wrapper">
 		<nav>
