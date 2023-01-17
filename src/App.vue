@@ -21,7 +21,7 @@ export default {
 
 		setGameState() {
 			this.fetchGameData().then((response) => {
-				console.log("App rerendering!");
+				console.log("Fetching game data!");
 				this.date = response.data.date;
 				this.name = response.data.name;
 				this.id = response.data.id;
@@ -59,7 +59,7 @@ export default {
 	</div>
 
 	<BarChart ref="barchart" :players=this.players />
-	<Line ref="linechart" :players=this.players />
+	<Line ref="linechart" :players=this.players :key=this.date />
 
 	<!--<div class="wrapper">
 		<nav>

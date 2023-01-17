@@ -9,17 +9,32 @@ export default {
 	components: { Line },
 	computed: {
 		chartData() {
-			let labels = []
+			let labels = ["score", "score"]
 			let datasets = []
 
+			// for each player in players
+			// if player is already in the dataset, push their new data to them
+			// else if player does not exist, add them to the list and then also add their data
+
 			this.players.forEach((player, index) => {
-				if (datasets.some(data.label === player.igns[0])) {
+				if (datasets.some(data => data.label === player.igns[0])) {
+					console.log(`Already contains: ${player.igns[0]}`)
 					datasets[index].data.push(player.score);
 				} else {
-					datasets.push({data: [ player.score ]});
-					labels.push(player.igns[0]);
+					console.log(`New data!`);
+					datasets.push(
+					{
+						data: [ player.score ],
+						backgroundColor: "white",
+						label: String(player.igns[0])
+					}
+					);
+
+					datasets[index].data.push( Math.floor(Math.random() * 2000) )
 				}
 			})
+
+			console.log(datasets);
 
 			return { 
 				labels,
@@ -29,6 +44,7 @@ export default {
 		chartOptions() {
 			return {
 				responsive: true,
+				mode: 'nearest',
 				indexAxis: "y",
 				color: "#a6a6a6",
 				scales: {
@@ -57,6 +73,7 @@ export default {
     id="lineChartIndividual"
     :options="chartOptions"
     :data="chartData"
+	v-show="false"
   />
 </template>
 
