@@ -3,7 +3,7 @@
 import Home from "./views/HomeView.vue"
 
 export default {
-	name: 'Main',
+	name: 'App',
 	components: {
 		Home
 	},
