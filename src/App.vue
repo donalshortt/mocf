@@ -10,7 +10,7 @@ export default {
 		return {
 			date: "0.0.0",
 			name: "name_unset",
-			id: "42c0ff06-1d95-4ef7-bad5-d8e28fa2473b",
+			id: "6672ab36-0397-413c-bd45-9d87f22c7c7e",
 			players: []
 		}
 	},
