@@ -1,5 +1,4 @@
 <script>
-
 import Home from "./views/HomeView.vue"
 
 export default {
