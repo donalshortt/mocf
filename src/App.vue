@@ -1,5 +1,6 @@
 <script>
 import Home from "./views/HomeView.vue"
+import AdminView from "./views/AdminView.vue"
 
 export default {
 	name: 'App',
@@ -12,6 +13,6 @@ export default {
 
 <template>
 	<div id="main">
-		<Home></Home>
+		<router-view></router-view>
 	</div>
 </template>
