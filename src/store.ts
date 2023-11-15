@@ -1,53 +1,26 @@
-import { InjectionKey } from "vue"
-import { createStore, Store } from "vuex"
+import { reactive } from 'vue'
+import axios from './axios-config'
 
-export const key: InjectionKey<Store<State>> = Symbol()
+export const store = reactive({
+	date: "0.0.0",
+	name: "name_unset",
+	id: "030184ca-1f70-4cfc-9da4-f03118c1a74c",
+	players: []
+})
 
-export interface State {
-	date: String,
-	name: String,
-	id: String,
-	players: Array<any>
+async function fetchGameData(gameId: string) {
+    return await axios.get('/api/game_data', { params: { id: gameId } });
 }
 
-//https://vuex.vuejs.org/guide/typescript-support.html#simplifying-usestore-usage
-
-export const store = createStore<State>({ 
-	state () {
-		return {
-			date: "0.0.0",
-			name: "name_unset",
-			id: "42c0ff06-1d95-4ef7-bad5-d8e28fa2473b",
-			players: []
-		}
-	},
-	mutations: {
-		setDate(state, date) {
-			state.date = date
-		},
-		setName(state, name) {
-			state.name = name
-		},
-		setID(state, id) {
-			state.id = id
-		},
-		setPlayers(state, players) {
-			state.players = players
-		}
-	},
-	getters: {
-		getDate(state) {
-			return state.date
-		},
-		getName(state) {
-			return state.name
-		},
-		getID(state) {
-			return state.id
-		},
-		getPlayers(state) {
-			return state.players
-		}
-	}
-})
+export async function setGameState() {
+    try {
+        const response = await fetchGameData(store.id);
+        store.date = response.data.date;
+        store.name = response.data.name;
+        store.id = response.data.id;
+        store.players = response.data.players;
+    } catch (error) {
+        console.error('Error fetching game data:', error);
+    }
+}
 

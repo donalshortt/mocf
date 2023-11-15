@@ -18,10 +18,8 @@ export default {
 
 			this.players.forEach((player, index) => {
 				if (datasets.some(data => data.label === player.igns[0])) {
-					console.log(`Already contains: ${player.igns[0]}`)
 					datasets[index].data.push(player.score);
 				} else {
-					console.log(`New data!`);
 					datasets.push(
 					{
 						data: [ player.score ],
@@ -33,8 +31,6 @@ export default {
 					datasets[index].data.push( Math.floor(Math.random() * 2000) )
 				}
 			})
-
-			console.log(datasets);
 
 			return { 
 				labels,

@@ -4,30 +4,14 @@ import TopBar from "../components/TopBar.vue"
 import BarChart from "../components/BarChart.vue"
 import Line from "../components/LineChart.vue"
 
+import { setGameState, store } from "../store.ts"
+
 export default {
 	name: 'Home',
 	data() {
 		return {
-			date: "0.0.0",
-			name: "name_unset",
-			id: "42c0ff06-1d95-4ef7-bad5-d8e28fa2473b",
-			players: []
+			store
 		}
-	},
-	methods: {
-		async fetchGameData() {
-			return await this.$axios.get('/api/game_data', { params: { id: this.id } });
-		},
-
-		setGameState() {
-			this.fetchGameData().then((response) => {
-				console.log("Fetching game data!");
-				this.date = response.data.date;
-				this.name = response.data.name;
-				this.id = response.data.id;
-				this.players = response.data.players;
-			})
-		},
 	},
 	components: {
 		Card,
@@ -36,10 +20,10 @@ export default {
 		Line
 	},
 	mounted() {
-		this.setGameState();
+		setGameState();
 
 		let updateData = () => {
-			this.setGameState();
+			setGameState();
 			setTimeout(updateData, 15000);
 		};
 
@@ -55,11 +39,11 @@ export default {
 	<TopBar></TopBar>
 
 	<div id="card_container">
-		<Card v-for="player in this.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player.tag />
+		<Card v-for="player in store.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player.tag />
 	</div>
 
-	<BarChart ref="barchart" :players=this.players />
-	<Line ref="linechart" :players=this.players :key=this.date />
+	<BarChart ref="barchart" :players=store.players />
+	<Line ref="linechart" :players=store.players :key=store.date />
 
 	</div>
 </template>
