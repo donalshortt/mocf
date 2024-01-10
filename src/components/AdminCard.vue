@@ -1,6 +1,7 @@
 <script>
 
 import Modifier from './Modifier.vue'
+import axios from '../axios-config'
 
 export default {
 	name: 'Card',
@@ -28,7 +29,7 @@ export default {
 	},
 	methods: {
 		async getModifiers() {
-			return await this.$axios.get('/api/modifiers', { params: { id: this.$parent.id, tag: this.tag } });
+			return await axios.get('/api/modifiers', { params: { id: this.$parent.store.id, tag: this.tag } });
 		},
 
 		setModifers() {
