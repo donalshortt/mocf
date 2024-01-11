@@ -2,7 +2,7 @@
 	import TopBar from "../components/TopBar.vue"
 	import AdminCard from "../components/AdminCard.vue"
 
-	import { setGameState, store } from "../store.ts"
+	import { setGameState, store } from "../store.js"
 
 	export default {
 		name: 'Admin',

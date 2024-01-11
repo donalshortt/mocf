@@ -4,7 +4,7 @@ import TopBar from "../components/TopBar.vue"
 import BarChart from "../components/BarChart.vue"
 import Line from "../components/LineChart.vue"
 
-import { setGameState, store } from "../store.ts"
+import { setGameState, store } from "../store.js"
 
 export default {
 	name: 'Home',

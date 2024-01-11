@@ -4,11 +4,11 @@ import axios from './axios-config'
 export const store = reactive({
 	date: "0.0.0",
 	name: "name_unset",
-	id: "030184ca-1f70-4cfc-9da4-f03118c1a74c",
+	id: "b778d068-dee0-464c-bae3-691812611b49",
 	players: []
 })
 
-async function fetchGameData(gameId: string) {
+async function fetchGameData(gameId) {
     return await axios.get('/api/game_data', { params: { id: gameId } });
 }
 

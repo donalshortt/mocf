@@ -3,8 +3,22 @@
 import axios from '../axios-config'
 
 export default {
-	name: 'Modifier',
-	props: ['name', 'amount']
+	name: 'AdminModifier',
+	props: ['name', 'amount'],
+	methods: {
+		delete_modifier() {
+			axios.post('/api/modifier', {
+				name: this.name,
+				amount: this.amount
+			})
+			.then(response => {
+				console.log(response)
+			})
+			.catch(error => {
+				console.log(error)
+			})
+		}
+	}
 }
 
 </script>
@@ -13,6 +27,7 @@ export default {
 	<div id="modifier">
 		<p id="name">{{ name }}</p>
 		<p id="amount">{{ amount }}%</p>
+		<span on-click="delete_modifier">X</span>
 	</div>
 </template>
 

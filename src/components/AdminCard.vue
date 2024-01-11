@@ -1,6 +1,6 @@
 <script>
 
-import Modifier from './Modifier.vue'
+import AdminModifier from './AdminModifier.vue'
 import axios from '../axios-config'
 
 export default {
@@ -39,7 +39,7 @@ export default {
 		}
 	},
 	components: {
-		Modifier
+		AdminModifier
 	},
 	mounted() {
 		this.setModifers();
@@ -60,12 +60,12 @@ export default {
 		<h2>{{ score }}</h2>
 		<h4>{{ difference }}</h4>
 
-		<modifier 
+		<AdminModifier 
 		:name=Object.keys(value).toString() 
 		:amount=Object.values(value).toString() 
 		v-for="value in this.modifiers"
 		:key="value">
-		</modifier>
+		</AdminModifier>
 	</div>
 </template>
 
