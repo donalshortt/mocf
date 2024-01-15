@@ -4,7 +4,7 @@ import axios from './axios-config'
 export const store = reactive({
 	date: "0.0.0",
 	name: "name_unset",
-	id: "b778d068-dee0-464c-bae3-691812611b49",
+	id: "f7a997c7-7d3c-42bd-a420-322b4d2ac7e3",
 	players: []
 })
 

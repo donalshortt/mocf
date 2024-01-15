@@ -1,6 +1,5 @@
 <script>
 import Home from "./views/HomeView.vue"
-import AdminView from "./views/AdminView.vue"
 
 export default {
 	name: 'App',

@@ -22,6 +22,7 @@ p {
 
 #modifier {
 	text-align: left;
+	margin-top: 0.25em;
 }
 
 #name {
