@@ -56,6 +56,7 @@ p {
 	float: right;
 	margin-right: 1em;
 	color: white;
+	cursor: pointer;
 }
 
 </style>
