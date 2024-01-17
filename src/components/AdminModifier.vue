@@ -7,16 +7,18 @@ export default {
 	props: ['name', 'amount'],
 	methods: {
 		delete_modifier() {
-			axios.post('/api/modifier', {
-				name: this.name,
-				amount: this.amount
+			console.log("Deleting modifier");
+
+			axios.delete('/api/modifier', {
+				params: {
+					id: this.$parent.$parent.store.id,
+					tag: this.$parent.tag,
+					key: this.name,
+					value: this.amount
+				}
 			})
-			.then(response => {
-				console.log(response)
-			})
-			.catch(error => {
-				console.log(error)
-			})
+
+			this.$emit('remove');
 		}
 	}
 }
@@ -26,7 +28,7 @@ export default {
 <template>
 	<div id="modifier">
 		<p id="name">{{ name }}</p>
-		<span id ="delete_modifier" on-click="delete_modifier">✖</span>
+		<span id="delete_modifier" @click="delete_modifier">✖</span>
 		<p id="amount">{{ amount }}%</p>
 	</div>
 </template>

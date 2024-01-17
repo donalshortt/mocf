@@ -36,6 +36,9 @@ export default {
 			this.getModifiers().then((response) => {
 				this.modifiers = response.data;
 			})
+		},
+		removeComponent(index){
+			this.components.splice(index, 1);
 		}
 	},
 	components: {
