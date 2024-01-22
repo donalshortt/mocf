@@ -1,6 +1,7 @@
 <script>
 
 import AdminModifier from './AdminModifier.vue'
+import AddModifier from './AddModifier.vue'
 import axios from '../axios-config'
 
 export default {
@@ -42,7 +43,8 @@ export default {
 		}
 	},
 	components: {
-		AdminModifier
+		AdminModifier,
+		AddModifier
 	},
 	mounted() {
 		this.setModifers();
@@ -70,6 +72,9 @@ export default {
 		:key="value"
 		v-on:remove="removeComponent(index)">
 		</AdminModifier>
+
+		<AddModifier></AddModifier>
+		
 	</div>
 </template>
 
