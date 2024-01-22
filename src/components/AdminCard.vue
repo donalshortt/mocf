@@ -38,7 +38,7 @@ export default {
 			})
 		},
 		removeComponent(index){
-			this.components.splice(index, 1);
+			this.modifiers.splice(index, 1);
 		}
 	},
 	components: {
@@ -66,8 +66,9 @@ export default {
 		<AdminModifier 
 		:name=Object.keys(value).toString() 
 		:amount=Object.values(value).toString() 
-		v-for="value in this.modifiers"
-		:key="value">
+		v-for="(value, index) in this.modifiers"
+		:key="value"
+		v-on:remove="removeComponent(index)">
 		</AdminModifier>
 	</div>
 </template>
