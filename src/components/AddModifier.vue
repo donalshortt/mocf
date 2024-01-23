@@ -9,16 +9,13 @@ export default {
 		async add_modifier() {
 			try {
 				const response = await axios.post('/api/modifier', {
-					params: {
 						id: this.$parent.$parent.store.id,
 						tag: this.$parent.tag,
 						modifier: {
 							[this.name]: this.amount
 						}
-					}
 				});
 
-				console.log(response.data);
 			} catch (error) {
 				console.log(error);
 			}

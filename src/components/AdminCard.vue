@@ -32,7 +32,6 @@ export default {
 		async getModifiers() {
 			return await axios.get('/api/modifiers', { params: { id: this.$parent.store.id, tag: this.tag } });
 		},
-
 		setModifers() {
 			this.getModifiers().then((response) => {
 				this.modifiers = response.data;
