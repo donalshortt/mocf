@@ -4,7 +4,7 @@ import axios from './axios-config'
 export const store = reactive({
 	date: "0.0.0",
 	name: "name_unset",
-	id: "c6703552-229d-45cf-ac8c-ef805dff8f2e",
+	id: "",
 	players: []
 })
 
@@ -17,10 +17,13 @@ export async function setGameState() {
         const response = await fetchGameData(store.id);
         store.date = response.data.date;
         store.name = response.data.name;
-        store.id = response.data.id;
         store.players = response.data.players;
     } catch (error) {
         console.error('Error fetching game data:', error);
     }
+}
+
+export function setGameID(newID) {
+	store.id = newID;
 }
 

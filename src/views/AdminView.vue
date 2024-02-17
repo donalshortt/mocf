@@ -15,15 +15,33 @@
 			AdminCard,
 			TopBar,
 		},
-		mounted() {
-			setGameState();
-
-			let updateData = () => {
+		methods: {
+			updateData() {
 				setGameState();
-				setTimeout(updateData, 15000);
-			};
-
-			setTimeout(updateData, 15000);
+			},
+			pollData() {
+				this.updateData();
+				setTimeout(this.pollData, 15000);
+			}
+		},
+		mounted() {
+			this.$nextTick(() => {
+				this.pollData();
+			})
+		},
+		watch: {
+		  'store.players': {
+			handler() {
+			  this.$nextTick(() => {
+				if (this.$refs.card && this.$refs.card.length) {
+				  this.$refs.card.forEach(cardComponent => {
+					cardComponent.setModifiers();
+				  });
+				}
+			  });
+			},
+			immediate: true,
+		  }
 		}
 	}
 
@@ -32,10 +50,10 @@
 <template>
 	<div id="admin">
 	
-	<TopBar></TopBar>
+	<TopBar @gameSelected="this.updateData"></TopBar>
 	
 	<div id="card_container">
-		<AdminCard v-for="player in store.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player.tag />
+		<AdminCard ref="card" v-for="player in store.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player.tag />
 	</div>
 
 	</div>

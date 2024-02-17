@@ -32,7 +32,7 @@ export default {
 		async getModifiers() {
 			return await axios.get('/api/modifiers', { params: { id: this.$parent.store.id, tag: this.tag } });
 		},
-		setModifers() {
+		setModifiers() {
 			this.getModifiers().then((response) => {
 				this.modifiers = response.data;
 			})
@@ -45,16 +45,6 @@ export default {
 		AdminModifier,
 		AddModifier
 	},
-	mounted() {
-		this.setModifers();
-
-		let updateData = () => {
-			this.setModifers();
-			setTimeout(updateData, 15000);
-		};
-
-		setTimeout(updateData, 15000);
-	}
 }
 </script>
 
