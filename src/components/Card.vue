@@ -36,7 +36,13 @@ export default {
 			console.log("Setting modifiers!");
 
 			this.getModifiers().then((response) => {
-				this.modifiers = response.data;
+				if (response.data == "modifier data not found" ) {  
+					// TODO: handle error
+				} else if (response.data == "file not found") {
+					// TODO: handle error
+				} else {
+					this.modifiers = response.data;
+				}
 			})
 		}
 	},
