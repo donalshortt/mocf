@@ -9,7 +9,7 @@ import './global.css'
 const app = createApp(App);
 
 const axiosInstance = axios.create({
-	baseURL: "http://127.0.0.1:8080/"
+	baseURL: `${window.location.protocol}//${window.location.hostname}:8080/`
 });
 
 app.provide('axios', axiosInstance);
