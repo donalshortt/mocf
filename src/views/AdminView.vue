@@ -53,7 +53,7 @@
 	<TopBar @gameSelected="this.updateData"></TopBar>
 	
 	<div id="card_container">
-		<AdminCard ref="card" v-for="player in store.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player.tag />
+		<AdminCard ref="card" v-for="player in store.players" :ign=player.ign :score=player.score :tag=player.tag :key=player.tag />
 	</div>
 
 	</div>

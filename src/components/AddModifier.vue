@@ -10,7 +10,7 @@ export default {
 			try {
 				const response = await axios.post('/api/modifier', {
 						id: this.$parent.$parent.store.id,
-						tag: this.$parent.tag,
+						ign: this.$parent.ign,
 						modifier: {
 							[this.name]: this.amount
 						}

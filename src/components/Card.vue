@@ -29,7 +29,7 @@ export default {
 	},
 	methods: {
 		async getModifiers() {
-			return await axios.get('/api/modifiers', { params: { id: this.$parent.store.id, tag: this.tag } });
+			return await axios.get('/api/modifiers', { params: { id: this.$parent.store.id, ign: this.ign } });
 		},
 
 		setModifiers() {

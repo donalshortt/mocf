@@ -57,7 +57,7 @@ export default {
 	<TopBar @gameSelected="this.updateData"></TopBar>
 
 	<div id="card_container">
-		<Card ref="card" v-for="player in store.players" :ign=player.igns[0] :score=player.score :tag=player.tag :key=player.tag />
+		<Card ref="card" v-for="player in store.players" :ign=player.ign :score=player.score :tag=player.tag :key=player.tag />
 	</div>
 
 	<BarChart ref="barchart" :players=store.players />
