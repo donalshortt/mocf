@@ -100,7 +100,6 @@ export default {
 	position: relative;
 }
 
-/* CSS */
 .button-82-pushable {
 	position: relative;
 	border: none;
@@ -203,6 +202,10 @@ export default {
 	outline: none;
 }
 
+#customDropdown {
+	z-index: 1000;
+}
+
 .dropdown-content {
 	margin-top: 1em;
     display: none;
@@ -239,6 +242,8 @@ export default {
 	display: flex;
 	align-items: center;
 	background-color: #1a1a1a;
+	position: fixed;
+	z-index: 999;
 }
 
 #title {

@@ -70,6 +70,7 @@ export default {
 
 #card_container {
 	text-align: center;
+	padding-top: 3em;
 }
 
 </style>

@@ -1,6 +1,7 @@
 <script>
 	import TopBar from "../components/TopBar.vue"
 	import AdminCard from "../components/AdminCard.vue"
+	import Inbox from "../components/Inbox.vue"
 
 	import { setGameState, store } from "../store.js"
 
@@ -14,6 +15,7 @@
 		components: {
 			AdminCard,
 			TopBar,
+			Inbox,
 		},
 		methods: {
 			updateData() {
@@ -56,9 +58,16 @@
 		<AdminCard ref="card" v-for="player in store.players" :ign=player.ign :score=player.score :tag=player.tag :key=player.tag />
 	</div>
 
+	<Inbox />
+
 	</div>
 </template>
 
 <style scoped>
+
+#card_container {
+	margin-right: 22vw;
+	padding-top: 3em;
+}
 
 </style>
