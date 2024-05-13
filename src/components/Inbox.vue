@@ -1,13 +1,14 @@
 <script>
 	import Decision from './Decision.vue'
 
-	import { store } from "../store.js"
+	import { getDecisions, store, decisions } from "../store.js"
 
 	export default {
 		name: 'Inbox',
 		data() {
 			return {
-				store
+				store,
+				decisions							
 			}
 		},
 		components: {
@@ -20,7 +21,7 @@
 	<div id="inbox">
 		<h1>Inbox</h1>
 
-		<Decision ref="decision" v-for="player in store.players" :ign=player.ign :score=player.score :tag=player.tag :key=player.tag />
+		<Decision ref="decision" v-for="decision in decisions" :ign=decision.ign :key=decision.ign />
 	</div>
 </template>
 
