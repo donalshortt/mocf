@@ -32,18 +32,18 @@
 			})
 		},
 		watch: {
-		  'store.players': {
-			handler() {
-			  this.$nextTick(() => {
-				if (this.$refs.card && this.$refs.card.length) {
-				  this.$refs.card.forEach(cardComponent => {
-					cardComponent.setModifiers();
-				  });
-				}
-			  });
-			},
-			immediate: true,
-		  }
+			'store.players': {
+				handler() {
+					this.$nextTick(() => {
+						if (this.$refs.card && this.$refs.card.length) {
+							this.$refs.card.forEach(cardComponent => {
+								cardComponent.setModifiers();
+							});
+						}
+					});
+				},
+				immediate: true,
+			}
 		}
 	}
 

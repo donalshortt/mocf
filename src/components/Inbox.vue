@@ -1,15 +1,35 @@
 <script>
 	import Decision from './Decision.vue'
+	import axios from '../axios-config'
 
-	import { getDecisions, store, decisions } from "../store.js"
+	import { store } from "../store.js"
 
 	export default {
 		name: 'Inbox',
 		data() {
 			return {
 				store,
-				decisions							
+				decisions: []
 			}
+		},
+		methods: {
+			async getDecisions() {
+				console.log("getting decisions");
+				const decisions = await axios.get('/api/decisions', { params: { id: store.id }});
+				console.log(`Store ID: ${store.id}`);
+				this.decisions = decisions.data;
+
+				console.log(`Decisions: ${decisions.data}`);
+			},
+			pollData() {
+				this.getDecisions();
+				setTimeout(this.pollData, 15000);
+			}
+		},
+		mounted() {
+			this.$nextTick(() => {
+				this.pollData();
+			})
 		},
 		components: {
 			Decision

@@ -8,8 +8,6 @@ export const store = reactive({
 	players: []
 })
 
-export const decisions = reactive([])
-
 async function fetchGameData(gameId) {
     return await axios.get('/api/game_data', { params: { id: gameId } });
 }
@@ -23,11 +21,6 @@ export async function setGameState() {
     } catch (error) {
         console.error('Error fetching game data:', error);
     }
-}
-
-export async function getDecisions() {
-	const response = await axios.get('/api/decisions', { params: { id: store.id }});
-	decisions = response.data;
 }
 
 export function setGameID(newID) {
