@@ -16,10 +16,8 @@
 			async getDecisions() {
 				console.log("getting decisions");
 				const decisions = await axios.get('/api/decisions', { params: { id: store.id }});
-				console.log(`Store ID: ${store.id}`);
 				this.decisions = decisions.data;
-
-				console.log(`Decisions: ${decisions.data}`);
+				console.log(decisions.data);
 			},
 			pollData() {
 				this.getDecisions();
