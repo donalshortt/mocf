@@ -58,6 +58,7 @@
 	-webkit-box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
 	box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
-	z-index: -1;
+	z-index: 100;
+	border-radius: .5em;
 }
 </style>
