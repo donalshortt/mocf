@@ -8,7 +8,11 @@
 		},
 		methods: {
 			decide(option) {
-				axios.post('/api/decide', { id: store.id, ign: this.ign, decision: this.decision })
+				if (option == 'New Player') {
+					axios.post('/api/decide', { id: store.id, ign: this.ign, decision: 'newIGN' })
+				} else {
+					
+				}
 			}
 		},
 	}
