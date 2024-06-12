@@ -2,6 +2,7 @@
 
 import axios from '../axios-config'
 import { setGameID } from "../store.js"
+import BigButton from './BigButton.vue'
 
 export default {
 	name: 'TopBar',
@@ -41,7 +42,8 @@ export default {
 		axios.get('/api/games').then((response) => {
 			this.games = response.data;
 		})
-	}
+	},
+	components: { BigButton },
 }
 
 </script>
@@ -61,25 +63,17 @@ export default {
 					</span>
 				</button>
 				<div class="dropdown-content" :class="{'active': isDroppedDown}">
-						<a href="#" class="dropdown-item" 
-							v-for="game in games" 
-							:key="game.id" 
-							@click.prevent="selectGame(game)">
-							{{ game.name }}
-						</a>
-					</div>
+					<a href="#" class="dropdown-item" 
+						v-for="game in games" 
+						:key="game.id" 
+						@click.prevent="selectGame(game)">
+						{{ game.name }}
+					</a>
 				</div>
 			</div>
-			<div class="buttons">
-				<button class="button-82-pushable" role="button">
-					<span class="button-82-shadow"></span>
-					<span class="button-82-edge"></span>
-					<span id="login" class="button-82-front text">
-						Login
-					</span>
-				</button>
-			</div>
+			<BigButton :option='Login' />
 		</div>
+	</div>
 </template>
 
 <style scoped>

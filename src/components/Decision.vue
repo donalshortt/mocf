@@ -1,13 +1,15 @@
 <script>
+	import BigButton from './BigButton.vue'
+
 	export default {
 		name: 'Decision',
 		data() {
-			retun {
+			return {
 				decisionState: 'IsNewIGN',
 			}
 		},
 		props: ['ign', 'question', 'options'],
-		components: {},
+		components: { BigButton },
 		methods: {
 			decide(option) {
 				if (option == "SelectOldIGN") {
@@ -25,41 +27,17 @@
 	<div v-if="this.decisionState == 'IsNewIGN'" class="decision">
 		<h2>{{ question }}</h2>
 		<h3>{{ ign }}</h3>
-		<div class="options">
-			<button @click="onSelect" v-for="option in options" :key=option class="button-82-pushable" role="button">
-				<span class="button-82-shadow"></span>
-				<span class="button-82-edge"></span>
-				<span class="button-82-front text login">
-					{{ option }}
-				</span>
-			</button>
-		</div>
+		<BigButton @click="decide" :option="option" v-for="option in options" :key=option />
 	</div>
 
 	<div v-if="this.decisionState == 'SelectOldIGN'" class="decision">
 		<h2>{{ question }}</h2>
 		<h3>{{ ign }}</h3>
-			<button @click="onSelect" v-for="option in options" :key=option class="button-82-pushable" role="button">
-				<span class="button-82-shadow"></span>
-				<span class="button-82-edge"></span>
-				<span class="button-82-front text login">
-					{{ option }}
-				</span>
-			</button>
 	</div>
 
 	<div v-if="this.decisionState == 'Confirm'" class="decision">
 		<h2>{{ question }}</h2>
 		<h3>{{ ign }}</h3>
-		<div class="options">
-			<button @click="onSelect" v-for="option in options" :key=option class="button-82-pushable" role="button">
-				<span class="button-82-shadow"></span>
-				<span class="button-82-edge"></span>
-				<span class="login" class="button-82-front text login">
-					{{ option }}
-				</span>
-			</button>
-		</div>
 	</div>
 </template>
 
