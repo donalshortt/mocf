@@ -11,13 +11,16 @@
 		props: ['ign', 'question', 'options'],
 		components: { BigButton },
 		methods: {
-			decide(option) {
-				if (option == "SelectOldIGN") {
-					this.decisionState = "SelectOldIGN";
-				} else if (option == "Confirm") {
-					this.decisionState = "Confirm"
+			decide(option) { 
+				this.decisionState = option;
+
+				switch (this.decisionState) {
+					case 'SelectOldIGN':
+						this.question = 'Select Old IGN'
+					case 'Confirm':
 				}
-			}
+			},
+
 		},
 	}
 
@@ -27,17 +30,20 @@
 	<div v-if="this.decisionState == 'IsNewIGN'" class="decision">
 		<h2>{{ question }}</h2>
 		<h3>{{ ign }}</h3>
-		<BigButton @click="decide" :option="option" v-for="option in options" :key=option />
+		<BigButton @click="decide" :label="option" v-for="option in options" :key=option />
 	</div>
 
 	<div v-if="this.decisionState == 'SelectOldIGN'" class="decision">
 		<h2>{{ question }}</h2>
 		<h3>{{ ign }}</h3>
+		<BigButton @click="selectOldIGN" label="Select" />
 	</div>
 
 	<div v-if="this.decisionState == 'Confirm'" class="decision">
-		<h2>{{ question }}</h2>
+		<h2>Confirm</h2>
+		<h3>{{ question }}</h3>
 		<h3>{{ ign }}</h3>
+		<BigButton @click="confirm" label="Confirm" />
 	</div>
 </template>
 

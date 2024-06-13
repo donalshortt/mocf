@@ -16,7 +16,7 @@ export default {
 	computed: {
         selectedGameName() {
             const game = this.games.find(game => game.id === this.selectedItem);
-            return game ? game.name : '';
+            return game ? game.name : 'Select Game';
         }
 	},
 	methods: {
@@ -48,20 +48,12 @@ export default {
 
 </script>
 
-<!-- Grab game names via ajax from backend -->
-
 <template>
 	<div id="topbar">
 		<h1 id="title">MoC</h1>
 		<div id="buttonsContainer">
 			<div id="customDropdown" class="buttons" @click="toggleDropdown">
-				<button class="button-82-pushable" role="button">
-					<span class="button-82-shadow"></span>
-					<span class="button-82-edge"></span>
-					<span class="button-82-front text">
-						{{ selectedGameName || 'Select Game' }}
-					</span>
-				</button>
+				<BigButton :label="selectedGameName" />
 				<div class="dropdown-content" :class="{'active': isDroppedDown}">
 					<a href="#" class="dropdown-item" 
 						v-for="game in games" 
@@ -71,7 +63,7 @@ export default {
 					</a>
 				</div>
 			</div>
-			<BigButton :option='Login' />
+			<BigButton label="Login" />
 		</div>
 	</div>
 </template>
@@ -86,6 +78,7 @@ export default {
 	display: flex;
 	align-items: center;
 	margin-left: auto;
+	margin-right: 1em;
 }
 
 .buttons {

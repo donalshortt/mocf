@@ -2,7 +2,7 @@
 export default {
 	name: 'BigButton',
 	components: {},
-	props: [ 'option' ],
+	props: [ 'label' ],
 }
 
 </script>
@@ -12,7 +12,7 @@ export default {
 		<span class="button-82-shadow"></span>
 		<span class="button-82-edge"></span>
 		<span class="button-82-front text login">
-			{{ option }}
+			{{ label }}
 		</span>
 	</button>
 </template>
