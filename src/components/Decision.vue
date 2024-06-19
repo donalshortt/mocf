@@ -1,5 +1,6 @@
 <script>
 	import BigButton from './BigButton.vue'
+	import { store } from "../store.js"
 
 	export default {
 		name: 'Decision',
@@ -11,16 +12,19 @@
 		props: ['ign', 'question', 'options'],
 		components: { BigButton },
 		methods: {
-			decide(option) { 
-				this.decisionState = option;
-
-				switch (this.decisionState) {
-					case 'SelectOldIGN':
-						this.question = 'Select Old IGN'
-					case 'Confirm':
+			decideIsNewIGN(option) { 
+				switch (option) {
+					case 'New Player':
+						decisionState = 'Confirm'
+						question = 'New player'
+					case 'New IGN':
+						decisionState = 'SelectOldIGN'
+						question = 'Select old IGN'
 				}
 			},
+			selectOldIGN() {
 
+			}
 		},
 	}
 
@@ -30,13 +34,23 @@
 	<div v-if="this.decisionState == 'IsNewIGN'" class="decision">
 		<h2>{{ question }}</h2>
 		<h3>{{ ign }}</h3>
-		<BigButton @click="decide" :label="option" v-for="option in options" :key=option />
+		<BigButton @click="decideIsNewIGN(option)" :label="option" v-for="option in options" :key=option />
 	</div>
 
 	<div v-if="this.decisionState == 'SelectOldIGN'" class="decision">
 		<h2>{{ question }}</h2>
 		<h3>{{ ign }}</h3>
-		<BigButton @click="selectOldIGN" label="Select" />
+		<div id="customDropdown" class="buttons" @click="toggleDropdown">
+			<BigButton @click="selectOldIGN" label="Select" />
+			<div class="dropdown-content" :class="{'active': isDroppedDown}">
+				<a href="#" class="dropdown-item" 
+					v-for="player in store.players" 
+					:key="player.ign" 
+					@click.prevent="selectGame(game)">
+					{{ player.ign }}
+				</a>
+			</div>
+		</div>
 	</div>
 
 	<div v-if="this.decisionState == 'Confirm'" class="decision">
