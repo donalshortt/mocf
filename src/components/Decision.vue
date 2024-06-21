@@ -13,12 +13,14 @@
 		components: { BigButton },
 		methods: {
 			decideIsNewIGN(option) { 
+				console.log(store.players);
+				
 				switch (option) {
 					case 'New Player':
-						decisionState = 'Confirm'
+						this.decisionState = 'Confirm'
 						question = 'New player'
 					case 'New IGN':
-						decisionState = 'SelectOldIGN'
+						this.decisionState = 'SelectOldIGN'
 						question = 'Select old IGN'
 				}
 			},

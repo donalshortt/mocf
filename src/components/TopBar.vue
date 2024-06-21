@@ -87,39 +87,6 @@ export default {
 	position: relative;
 }
 
-#customDropdown {
-	z-index: 1000;
-}
-
-.dropdown-content {
-	margin-top: 1em;
-    display: none;
-    position: absolute;
-	background-color: rgba(0, 0, 0, .40);
-	backdrop-filter: blur(5px);
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-	left: 50%; /* Align the left edge of the dropdown with the center of the button */
-	transform: translateX(-50%);
-	width: 12.5em;
-	-webkit-box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
-	box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.75);
-}
-
-.dropdown-content a {
-    color: var(--off-white);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.active {
-    display: block;
-}
-
 #topbar {
 	margin: 0;
 	width: 100%;
