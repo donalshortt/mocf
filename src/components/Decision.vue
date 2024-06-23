@@ -7,6 +7,7 @@
 		data() {
 			return {
 				decisionState: 'IsNewIGN',
+				question: this.question,
 			}
 		},
 		props: ['ign', 'question', 'options'],
@@ -18,16 +19,24 @@
 				switch (option) {
 					case 'New Player':
 						this.decisionState = 'Confirm'
-						question = 'New player'
+						this.question = 'New player'
 					case 'New IGN':
 						this.decisionState = 'SelectOldIGN'
-						question = 'Select old IGN'
+						this.question = 'Select old IGN'
 				}
+
+				console.log(this.question)
+			},
+			toggleDropdown() {
+				this.isDroppedDown = !this.isDroppedDown;
 			},
 			selectOldIGN() {
 
-			}
+			},
 		},
+		mounted() {
+			console.log(this.question);
+		}
 	}
 
 </script>
@@ -48,7 +57,7 @@
 				<a href="#" class="dropdown-item" 
 					v-for="player in store.players" 
 					:key="player.ign" 
-					@click.prevent="selectGame(game)">
+					@click.prevent="selectOldIGN(game)">
 					{{ player.ign }}
 				</a>
 			</div>
