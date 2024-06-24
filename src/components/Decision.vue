@@ -7,25 +7,40 @@
 		data() {
 			return {
 				decisionState: 'IsNewIGN',
-				question: this.question,
+				question_l: this.question,
+				selectedItem: null,
+				isDroppedDown: false,
 			}
 		},
-		props: ['ign', 'question', 'options'],
+		props: {
+			options: {
+				type: Array,
+				required: true
+			},
+			ign: {
+				type: String
+			},
+			question: {
+				type: String
+			}
+		},
 		components: { BigButton },
 		methods: {
 			decideIsNewIGN(option) { 
-				console.log(store.players);
-				
+				console.log(`Option: ${option}`)
 				switch (option) {
 					case 'New Player':
 						this.decisionState = 'Confirm'
-						this.question = 'New player'
+						this.question_l = 'New player'
+						break;
 					case 'New IGN':
 						this.decisionState = 'SelectOldIGN'
-						this.question = 'Select old IGN'
+						this.question_l = 'Select old IGN'
+						break;
 				}
 
-				console.log(this.question)
+				console.log(`Question: ${this.question_l}`)
+				console.log(`Decision State: ${this.decisionState}`)
 			},
 			toggleDropdown() {
 				this.isDroppedDown = !this.isDroppedDown;
@@ -33,9 +48,12 @@
 			selectOldIGN() {
 
 			},
+			confirm(){
+
+			}
 		},
 		mounted() {
-			console.log(this.question);
+			console.log(store);
 		}
 	}
 
@@ -57,7 +75,7 @@
 				<a href="#" class="dropdown-item" 
 					v-for="player in store.players" 
 					:key="player.ign" 
-					@click.prevent="selectOldIGN(game)">
+					@click.prevent="selectOldIGN(player.ign)">
 					{{ player.ign }}
 				</a>
 			</div>

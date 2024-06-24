@@ -1,14 +1,13 @@
 <script>
 export default {
 	name: 'BigButton',
-	components: {},
 	props: [ 'label' ],
 }
 
 </script>
 
 <template>
-	<button :key=option class="button-82-pushable" role="button">
+	<button class="button-82-pushable" role="button">
 		<span class="button-82-shadow"></span>
 		<span class="button-82-edge"></span>
 		<span class="button-82-front text login">
