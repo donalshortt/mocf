@@ -1,33 +1,25 @@
 <script>
 	import BigButton from './BigButton.vue'
 	import { store } from "../store.js"
+	import axios from '../axios-config'
 
 	export default {
 		name: 'Decision',
 		data() {
 			return {
+				prevDecisionState: '',
 				decisionState: 'IsNewIGN',
 				question_l: this.question,
+				old_ign: null,
 				selectedItem: null,
 				isDroppedDown: false,
+				players_l: store.players,
 			}
 		},
-		props: {
-			options: {
-				type: Array,
-				required: true
-			},
-			ign: {
-				type: String
-			},
-			question: {
-				type: String
-			}
-		},
+		props: ['options', 'ign', 'question'],
 		components: { BigButton },
 		methods: {
 			decideIsNewIGN(option) { 
-				console.log(`Option: ${option}`)
 				switch (option) {
 					case 'New Player':
 						this.decisionState = 'Confirm'
@@ -38,42 +30,43 @@
 						this.question_l = 'Select old IGN'
 						break;
 				}
-
-				console.log(`Question: ${this.question_l}`)
-				console.log(`Decision State: ${this.decisionState}`)
+				this.prevDecisionState = 'IsNewIGN'
 			},
 			toggleDropdown() {
 				this.isDroppedDown = !this.isDroppedDown;
 			},
-			selectOldIGN() {
-
+			selectOldIGN(old_ign) {
+				this.decisionState = 'ConfirmOldIGN'
+				this.old_ign = old_ign
+				this.prevDecisionState = 'SelectOldIGN'
 			},
-			confirm(){
-
+			confirmOldIGN(){
+				axios.post('/api/decide', { 
+					date: store.date,
+					ign: this.old_ign,
+					decision: 'newIGN'
+				})
 			}
 		},
-		mounted() {
-			console.log(store);
-		}
 	}
 
 </script>
 
 <template>
 	<div v-if="this.decisionState == 'IsNewIGN'" class="decision">
-		<h2>{{ question }}</h2>
+		<h2>{{ question_l }}</h2>
 		<h3>{{ ign }}</h3>
 		<BigButton @click="decideIsNewIGN(option)" :label="option" v-for="option in options" :key=option />
 	</div>
 
 	<div v-if="this.decisionState == 'SelectOldIGN'" class="decision">
-		<h2>{{ question }}</h2>
+		<h2>{{ question_l }}</h2>
 		<h3>{{ ign }}</h3>
 		<div id="customDropdown" class="buttons" @click="toggleDropdown">
-			<BigButton @click="selectOldIGN" label="Select" />
+			<BigButton label="Select" />
 			<div class="dropdown-content" :class="{'active': isDroppedDown}">
 				<a href="#" class="dropdown-item" 
-					v-for="player in store.players" 
+					v-for="player in players_l" 
 					:key="player.ign" 
 					@click.prevent="selectOldIGN(player.ign)">
 					{{ player.ign }}
@@ -82,11 +75,11 @@
 		</div>
 	</div>
 
-	<div v-if="this.decisionState == 'Confirm'" class="decision">
+	<div v-if="this.decisionState == 'ConfirmOldIGN'" class="decision">
 		<h2>Confirm</h2>
-		<h3>{{ question }}</h3>
-		<h3>{{ ign }}</h3>
-		<BigButton @click="confirm" label="Confirm" />
+		<h3>Old IGN: {{ old_ign }}</h3>
+		<h3>New IGN: {{ ign }}</h3>
+		<BigButton @click="confirmOldIGN(question)" label="Confirm" />
 	</div>
 </template>
 
