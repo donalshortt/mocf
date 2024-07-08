@@ -39,7 +39,7 @@
 	<div id="inbox">
 		<h1>Inbox</h1>
 
-		<Decision ref="decision" v-for="decision in decisions" :ign=decision.ign :question=decision.question :options=decision.options :key=decision.ign />
+		<Decision ref="decision" v-for="decision in decisions" :ign=decision.ign :question=decision.question :options=decision.options :key=decision.key />
 	</div>
 </template>
 
