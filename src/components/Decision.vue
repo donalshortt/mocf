@@ -15,7 +15,7 @@
 				players_l: store.players,
 			}
 		},
-		props: ['options', 'ign', 'question', 'key'],
+		props: ['options', 'ign', 'question', 'decKey'],
 		components: { BigButton },
 		methods: {
 			decideIsNewIGN(option) { 
@@ -39,9 +39,10 @@
 			},
 			confirmOldIGN() {
 				axios.post('/api/decide', { 
-					key: this.key,
+					key: this.decKey,
 					id: store.id,
-					decision: 'newIGN'
+					decision: 'newIGN',
+					old_ign: this.old_ign
 				})
 			},
 			confirmNewPlayer() {
