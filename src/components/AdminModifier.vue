@@ -12,7 +12,7 @@ export default {
 			axios.delete('/api/modifier', {
 				params: {
 					id: this.$parent.$parent.store.id,
-					tag: this.$parent.tag,
+					ign: this.$parent.ign,
 					key: this.name,
 					value: this.amount
 				}
